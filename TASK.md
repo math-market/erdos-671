@@ -47,17 +47,31 @@ Original sources: [Er82e], [Er97f], [Va99, 2.40], as recorded by Bloom.
 
 ## What wins
 
-A Lean 4 file defining **both** questions as propositions:
+A Lean 4 file defining **both** questions as propositions, plus one theorem relating them:
 
 ```lean
 def erdos671_Q1 : Prop := …
 def erdos671_Q2 : Prop := …
+
+theorem Q2_implies_Q1 : erdos671_Q2 → erdos671_Q1 := …
 ```
 
-**These are definitions, not theorems.** The problem is open, so there is nothing to prove and no
-`sorry` to close: a proposition whose truth is unknown is stated, not asserted. Your file must
-compile cleanly with no `sorry`, no `admit`, and no axioms beyond `propext`, `Classical.choice`,
-`Quot.sound`.
+**The two definitions are definitions, not theorems.** The problem is open, so there is nothing to
+prove about it and no `sorry` to close: a proposition whose truth is unknown is stated, not
+asserted.
+
+**`Q2_implies_Q1` is different, and it is required.** Erdős's second question is strictly stronger
+than his first — Q2 demands the Lebesgue function diverge at *every* point, Q1 only at the point
+it produces. So any faithful pair of renderings must satisfy that implication, and proving it says
+nothing about whether either question is true. It is a property of your *statement*, not of the
+problem.
+
+It is also the one mechanical grip this board has on faithfulness. Get the quantifier order wrong
+in either proposition and the implication stops going through. It is a short proof — under five
+lines, if the renderings are right.
+
+Your file must compile cleanly with no `sorry`, no `admit`, and no axioms beyond `propext`,
+`Classical.choice`, `Quot.sound`.
 
 Mathlib supplies the machinery: `Lagrange.basis s v i` is `pⁿᵢ`, `Lagrange.interpolate s v r` is
 `Lₙf`, and `Lagrange.eval_basis_self` carries the `Set.InjOn` hypothesis you will need.
@@ -76,8 +90,14 @@ propositions *say what Erdős asked*. A named reviewer will check at least:
    `x` it produces. Q2 implies Q1. A file stating one and calling it #671 is incomplete.
 4. **`limsup = ∞`** rendered faithfully — unboundedness of the partial sums, not merely
    divergence, and over the right filter.
-5. **Nodes in `[−1,1]`, `f` continuous on `[−1,1]`**, `pⁿᵢ` of degree `n−1`.
-6. **Nothing smuggled in.** No hypothesis that makes either proposition trivially true or
+5. **Nodes in `[−1,1]` and `f` continuous on `[−1,1]`.** Note that the degree condition needs no
+   separate hypothesis: Mathlib's `Lagrange.degree_basis` already gives `degree = n − 1` from
+   injectivity alone. Stating it again is redundant, not wrong; omitting it is not a defect.
+6. **`limsup … = ∞` and continuity admit more than one faithful rendering.** Unboundedness above
+   and `Filter.limsup = ∞` agree for a non-negative real sequence, and `ContinuousOn f (Icc (-1) 1)`
+   and a bundled `C([-1,1], ℝ)` are both defensible. The reviewer's job is to check the
+   equivalence holds, not to prefer a house style.
+7. **Nothing smuggled in.** No hypothesis that makes either proposition trivially true or
    trivially false.
 
 ## What this board is not

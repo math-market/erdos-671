@@ -28,8 +28,15 @@ cat axiom-report.txt
 echo "== nothing asserted =="
 # The problem is OPEN. A theorem proving either proposition would be a solution,
 # not a statement, and almost certainly an error.
-if grep -nE "^ *(theorem|lemma) " Erdos671.lean; then
-  echo "FAILED: this board asks for definitions, not theorems. The problem is open."; fail=1
+# Q2_implies_Q1 is the ONE theorem that belongs here — it is about the statements,
+# not about the problem. Any other theorem would be claiming to settle an open question.
+if grep -nE "^ *(theorem|lemma) " Erdos671.lean | grep -v "Q2_implies_Q1"; then
+  echo "FAILED: the only theorem permitted is Q2_implies_Q1. The problem is open,"
+  echo "        so anything else would be claiming to settle it."; fail=1
+fi
+if ! grep -q "theorem Q2_implies_Q1" Erdos671.lean; then
+  echo "FAILED: Q2_implies_Q1 is required — Q2 is strictly stronger than Q1, so a"
+  echo "        faithful pair of renderings must satisfy it."; fail=1
 fi
 if grep -q "sorryAx" axiom-report.txt || grep -nE "\bsorry\b|\badmit\b" Erdos671.lean; then
   echo "FAILED: a proposition is stated, not proved — there is nothing to leave sorry"; fail=1

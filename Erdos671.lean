@@ -46,4 +46,12 @@ This is strictly stronger than `erdos671_Q1`.
 TODO: state this. -/
 def erdos671_Q2 : Prop := TODO
 
+/-- **Required.** Erdős's second question is strictly stronger than his first, so any faithful
+pair of renderings must satisfy this. Proving it says nothing about whether either question is
+true — it is a property of the statements, not of the problem, and it is the one mechanical grip
+this board has on whether the quantifiers are right.
+
+Under five lines if the renderings above are correct. -/
+theorem Q2_implies_Q1 : erdos671_Q2 → erdos671_Q1 := sorry
+
 end Erdos671

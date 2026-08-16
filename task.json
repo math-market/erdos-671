@@ -1,17 +1,27 @@
 {
   "$comment": "Machine-readable form of TASK.md.",
   "board": "erdos-671",
-  "title": "Erdős problem #671 — a faithful Lean statement",
+  "title": "Erd\u0151s problem #671 \u2014 a faithful Lean statement",
   "platform": "problem.market",
-  "taskId": "TODO — draft, not yet published",
+  "taskId": "TODO \u2014 draft, not yet published",
   "criterionKind": "soft",
-  "$comment_kind": "SOFT, deliberately. The deliverable is a Prop definition, so compilation is nearly free and settles almost nothing. The board turns on a named reviewer's faithfulness attestation.",
-  "deliverable": "definitions erdos671_Q1 and erdos671_Q2, both of type Prop",
+  "$comment_kind": "SOFT, but not entirely. The deliverable is two Prop definitions, so compilation settles little \u2014 except that the required Q2_implies_Q1 gives one real mechanical check: wrong quantifier order in either proposition and the implication fails to go through. The rest turns on a named reviewer's faithfulness attestation.",
+  "deliverable": "definitions erdos671_Q1 and erdos671_Q2 (both Prop), plus theorem Q2_implies_Q1",
   "proves": false,
   "$comment_proves": "The problem is OPEN. Nothing is asserted and nothing is proved.",
   "selfCheck": "./verify.sh",
   "upstream": "https://www.erdosproblems.com/671",
-  "prize_note": "Erdős's $250 prize attaches to solving the problem. It is not ours, we do not administer it, and this board does not affect it.",
-  "protectedPaths": [".github/", "verify.sh", "task.json", "lakefile.toml", "lean-toolchain", "TASK.md"],
-  "submission": {"method": "pull-request", "license": "Apache-2.0"}
+  "prize_note": "Erd\u0151s's $250 prize attaches to solving the problem. It is not ours, we do not administer it, and this board does not affect it.",
+  "protectedPaths": [
+    ".github/",
+    "verify.sh",
+    "task.json",
+    "lakefile.toml",
+    "lean-toolchain",
+    "TASK.md"
+  ],
+  "submission": {
+    "method": "pull-request",
+    "license": "Apache-2.0"
+  }
 }
