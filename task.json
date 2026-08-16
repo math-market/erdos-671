@@ -1,0 +1,17 @@
+{
+  "$comment": "Machine-readable form of TASK.md.",
+  "board": "erdos-671",
+  "title": "Erdős problem #671 — a faithful Lean statement",
+  "platform": "problem.market",
+  "taskId": "TODO — draft, not yet published",
+  "criterionKind": "soft",
+  "$comment_kind": "SOFT, deliberately. The deliverable is a Prop definition, so compilation is nearly free and settles almost nothing. The board turns on a named reviewer's faithfulness attestation.",
+  "deliverable": "definitions erdos671_Q1 and erdos671_Q2, both of type Prop",
+  "proves": false,
+  "$comment_proves": "The problem is OPEN. Nothing is asserted and nothing is proved.",
+  "selfCheck": "./verify.sh",
+  "upstream": "https://www.erdosproblems.com/671",
+  "prize_note": "Erdős's $250 prize attaches to solving the problem. It is not ours, we do not administer it, and this board does not affect it.",
+  "protectedPaths": [".github/", "verify.sh", "task.json", "lakefile.toml", "lean-toolchain", "TASK.md"],
+  "submission": {"method": "pull-request", "license": "Apache-2.0"}
+}

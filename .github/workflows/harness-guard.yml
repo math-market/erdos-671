@@ -1,0 +1,19 @@
+name: harness-guard
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+permissions: {contents: read, pull-requests: read}
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Reject edits to the judging machinery
+        env: {GH_TOKEN: "${{ github.token }}"}
+        run: |
+          gh api --paginate repos/${{ github.repository }}/pulls/${{ github.event.number }}/files \
+            --jq '.[].filename' > /tmp/changed
+          PAT='^(\.github/|verify\.sh$|task\.json$|lakefile\.toml$|lean-toolchain$|TASK\.md$)'
+          if grep -Eq "$PAT" /tmp/changed; then
+            echo "This pull request edits the machinery that judges it:"; grep -E "$PAT" /tmp/changed; exit 1
+          fi
+          echo "harness untouched"
